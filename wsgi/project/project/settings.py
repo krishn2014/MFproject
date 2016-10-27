@@ -77,6 +77,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
 
     #Custom Apps
+    'mfapp',
 
     #3rd party Apps
     'rest_framework',
