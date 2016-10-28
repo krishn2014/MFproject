@@ -24,5 +24,6 @@ urlpatterns = [
     # url(r'^$',root_page),    
 
     # grouped urls
-    url(r'^scheme/(?P<schemecode>\w.+)/$', SchemeDetail.as_view()),
+    url(r'^schemes/(?P<schemecode>\w.+)/$', SchemeDetail.as_view()),
+    url(r'^schemes/$', SearchScheme.as_view()), #ex; schemes/?category=Open Ended Schemes(Balanced)
 ]

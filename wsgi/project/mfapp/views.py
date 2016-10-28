@@ -16,6 +16,7 @@ from serializers import *
 from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework import status
 
 class SchemeDetail(APIView):
     """
@@ -31,3 +32,15 @@ class SchemeDetail(APIView):
         scheme = self.get_object(schemecode)
         serializer = SchemeDetailsSerializer(scheme)
         return Response(serializer.data)
+
+class SearchScheme(APIView):
+    """
+    Retrieve details of a schema for a given category
+    """
+
+    def get(self, request, format=None):
+        if 'category' in request.GET:
+            schemes  = Scheme.objects.filter(fund=Fund.objects.filter(category__category=request.GET['category']))
+            serializer = SchemeSerializer(schemes, many=True)
+            return Response(serializer.data)
+        return Response("invalid url",status=status.HTTP_404_NOT_FOUND)
